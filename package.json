@@ -1,0 +1,22 @@
+{
+  "name": "cit-270-loganbradford",
+  "version": "1.0.0",
+  "description": "Token API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbrad24/CIT-270-loganbradford.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lbrad24/CIT-270-loganbradford/issues"
+  },
+  "homepage": "https://github.com/lbrad24/CIT-270-loganbradford#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
