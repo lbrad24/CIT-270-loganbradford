@@ -56,7 +56,7 @@ function userlogin(){
         success: function(data) {
             window.location.href = "/timer.html";//add the token to the url
         },
-        contentType: "application/text",
+        contentType: "application/json",
         dataType: 'text'
     });
 

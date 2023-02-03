@@ -12,8 +12,8 @@ const Redis = require('redis'); // the libary
 
 const redisClient = Redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
 
+app.use(express.static('public'));
 const cookieParser = require("cookie-parser");
-
 app.use(cookieParser());
 
 app.use(bodyParser.json()); //This looks for incoming data using body-parser
@@ -26,6 +26,13 @@ app.get("/validate", async (req, res) => {
     const loginUser = await redisClient.hGet("TokenMap",loginToken);
     res.send(loginUser);
 });
+
+app.post('/rapidsteptest', async (req,res)=>{
+    const steps =req.body;
+    await redisClient.zAdd("Steps", steps, 0);
+    console.log("Steps", steps);
+    res.send('saved');
+})
 
 app.post('/login',async (req, res) => {
     const loginUser = req.body.userName;
