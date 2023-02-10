@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+#from our openssl certification info (see systems security lecture 6.2)
+server.cert 
+server.key

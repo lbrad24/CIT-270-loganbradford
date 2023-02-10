@@ -2,7 +2,7 @@ const express = require ("express");
 
 const app = express();
 
-const port = 3000;
+const port = 443;
 
 const bodyParser = require ("body-parser");
 
@@ -12,8 +12,14 @@ const Redis = require('redis'); // the libary
 
 const redisClient = Redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
 
-app.use(express.static('public'));
 const cookieParser = require("cookie-parser");
+
+const https = require('https');
+
+const fs = require('fs');
+
+app.use(express.static('public'));
+
 app.use(cookieParser());
 
 app.use(async function (req, res, next){
@@ -67,7 +73,19 @@ app.post('/login',async (req, res) => {
     
 });
 
-app.listen(port, () => {
+/*app.listen(port, () => {
     redisClient.connect(); 
     console.log("listening");
+});*/
+
+//we are changing the app.listen to make the api listen for the certificate
+https.createServer(
+    {
+        key: fs.readFileSync('./server.key'),
+        cert: fs.readFileSync('./server.cert'), 
+        ca: fs.readFileSync('./chain.pem')
+}, app
+).listen(port, ()=>{
+    redisClient.connect();
+    console.log('Listening on port: ' + port);
 });
