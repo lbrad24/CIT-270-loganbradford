@@ -106,3 +106,5 @@ dist
 #from our openssl certification info (see systems security lecture 6.2)
 server.cert 
 server.key
+chain.pem
+node_modules
