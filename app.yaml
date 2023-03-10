@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cit270loganservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cit270loganservice
+  template:
+    metadata:
+      name: cit270loganservice
+      labels:
+        app: cit270loganservice
+    spec:
+      containers:
+       - name: cit270loganservice
+        image: cit-270-kubernetes/logan-api
+        volumeMounts:
+         - name: ssl
+            mountPath: "/etc/letsencrypt/live/SSL"
+        command: ["npm"]
+        args: ["run", "start"]
+        resources:
+          requests:
+            cpu: 0.125
+            memory: 500Mi
+          limits:
+            cpu: 0.125
+            memory: 600Mi
+        imagePullPolicy: always
+      volumes: 
+       - name: ssl
+        secret:
+          secretName: logancerts
