@@ -14,11 +14,11 @@ spec:
         app: cit270loganservice
     spec:
       containers:
-       - name: cit270loganservice
-        image: cit-270-kubernetes/logan-api
+      - name: cit270loganservice
+        image: gcr.io/cit-270-kubernetes/logan-api
         volumeMounts:
-         - name: ssl
-            mountPath: "/etc/letsencrypt/live/SSL"
+        - name: ssl
+          mountPath: "/etc/letsencrypt/live/loganbradford.cit270.com/"
         command: ["npm"]
         args: ["run", "start"]
         resources:
@@ -28,8 +28,8 @@ spec:
           limits:
             cpu: 0.125
             memory: 600Mi
-        imagePullPolicy: always
+        imagePullPolicy: Always
       volumes: 
-       - name: ssl
+      - name: ssl
         secret:
           secretName: logancerts
