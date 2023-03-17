@@ -10,7 +10,7 @@ const {v4: uuidv4} = require('uuid'); //universally unique identifier
 
 const Redis = require('redis'); // the libary 
 
-const redisClient = Redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
+const redisClient = Redis.createClient({url:"redis://default:9QnlU6Ym3D6If57R@redis-stedi-logan:6379"}); //this points to redis
 
 const cookieParser = require("cookie-parser");
 
