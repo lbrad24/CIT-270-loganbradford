@@ -8,8 +8,8 @@ const bodyParser = require ("body-parser");
 
 const redis = require('redis'); // the libary 
 
-//const redisClient = redis.createClient({url:"redis://default:9QnlU6Ym3D6If57R@redis-stedi-logan:6379"}); //this points to redis
-const redisClient = redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
+const redisClient = redis.createClient({url:"redis://default:9QnlU6Ym3D6If57R@redis-stedi-logan:6379"}); //this points to redis
+//const redisClient = redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
 
 const {v4: uuidv4} = require('uuid'); //universally unique identifier
 

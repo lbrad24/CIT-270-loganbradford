@@ -53,7 +53,7 @@ metadata:
 spec:
   selector:
     app: cit270loganservice
-  type: nodeport
+  type: NodePort
   ports:
     - port: 80
       targetPort: 3000
@@ -78,12 +78,12 @@ metadata:
 spec:
   rules:
   - http:
-    paths:
-    - path: /
-      pathType: Prefix
-      backend:
-        service:
-        #needs to match the name of the NodePort Service
-          name: stedi-loganbradford-nodeport
-          port:
-            number: 80
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+          #needs to match the name of the NodePort Service
+            name: stedi-loganbradford-nodeport
+            port:
+              number: 80
