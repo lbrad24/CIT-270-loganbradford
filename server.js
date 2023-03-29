@@ -2,15 +2,16 @@ const express = require ("express");
 
 const app = express();
 
-const port = 443;
+const port = 3000;
 
 const bodyParser = require ("body-parser");
 
+const redis = require('redis'); // the libary 
+
+//const redisClient = redis.createClient({url:"redis://default:9QnlU6Ym3D6If57R@redis-stedi-logan:6379"}); //this points to redis
+const redisClient = redis.createClient({url:"redis://127.0.0.1:6379"}); //this points to redis
+
 const {v4: uuidv4} = require('uuid'); //universally unique identifier
-
-const Redis = require('redis'); // the libary 
-
-const redisClient = Redis.createClient({url:"redis://default:9QnlU6Ym3D6If57R@redis-stedi-logan:6379"}); //this points to redis
 
 const cookieParser = require("cookie-parser");
 
@@ -73,11 +74,12 @@ app.post('/login',async (req, res) => {
     
 });
 
-/*app.listen(port, () => {
+app.listen(port, () => {
     redisClient.connect(); 
     console.log("listening");
-});*/
+});
 
+/*
 //we are changing the app.listen to make the api listen for the certificate
 https.createServer(
     {
@@ -88,4 +90,4 @@ https.createServer(
 ).listen(port, ()=>{
     redisClient.connect();
     console.log('Listening on port: ' + port);
-});
+});*/

@@ -33,3 +33,57 @@ spec:
       - name: ssl
         secret:
           secretName: logancerts
+#---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: cit270loganservice-loadbalancer
+# spec:
+#   selector:
+#     app: cit270loganservice
+#   type: LoadBalancer
+#   ports:
+#   - port: 443
+#     targetPort: 443
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stedi-loganbradford-nodeport
+spec:
+  selector:
+    app: cit270loganservice
+  type: nodeport
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: stedi-loganbradford-certificate
+spec:
+  domains:
+    - loganbradford.cit270.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stedi-loganbradford-ingress
+  annotations:
+  #Use this command to find the address name: gcloud compute addresses list
+    kubernetes.io/ingress.global-static-ip-name: cit270logan
+  #needs to match the name of the ManagedCertificate
+    networking.gke.io/managed-certificates: stedi-loganbradford-certificate
+spec:
+  rules:
+  - http:
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        service:
+        #needs to match the name of the NodePort Service
+          name: stedi-loganbradford-nodeport
+          port:
+            number: 80
